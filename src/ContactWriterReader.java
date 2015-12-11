@@ -1,7 +1,8 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.stream.Stream;
-import java.util.*;
+
+//import java.util.*;
 
 /**
  * 
@@ -10,7 +11,7 @@ import java.util.*;
 /**
  * @author woytek
  * @author Isabelle Schroeder
- *
+ * This program saves and reads a file of contacts.
  */
 public class ContactWriterReader {
 
@@ -19,9 +20,29 @@ public class ContactWriterReader {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		File myFile = new File( "my-contacts.txt");
-		Contact [] myContacts;
+		File myFile = new File("myOutputFile.txt");
+		Contact[] myContacts;
 		myContacts = new Contact[25]; // initialize to 25 elements
+		PrintWriter outputFile;
+		BufferedReader inputFile;
+		Scanner keyboard = new Scanner(System.in);
+		String inputString;
+		int inputInt;
+		int c = 1;
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/* File myFile = new File( "my-contacts.txt");
+//		Contact[] myContacts;
+//		myContacts = new Contact[25]; // initialize to 25 elements
 		BufferedReader inputFile;
 		String input;
 		int numContacts = 0;
@@ -32,11 +53,11 @@ public class ContactWriterReader {
 		// second time through recreate array
 		
 		/* Choose file and check to see if file exists */
-		if( myContacts.exists() ){
+		/*if( myContacts.exists() ){
 			/* if file exists, read the contacts into Contact objects
 			 * and display them to user
 			 */
-			reader = new BufferedReader( new FileReader(myFile) );
+		/*	reader = new BufferedReader( new FileReader(myFile) );
 			while(reader.ready() ){
 				// create new contact objects
 				myContacts[numCOntacts] = new Contact();
@@ -69,7 +90,7 @@ public class ContactWriterReader {
 		 */
 		
 		
-		do{ 
+		/*do{ 
 			// create new contact object in the array
 			myContacts[numContacts] = new Contact();
 			
@@ -97,7 +118,7 @@ public class ContactWriterReader {
 		}
 		
 	//		System.out.print(stuff.getName() + " does not exist. Enter new contact information." );
-		
+		*/
 		
 		
 		
