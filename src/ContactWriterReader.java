@@ -2,7 +2,9 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-//import java.util.*;
+import ContactTest.Contact;
+
+import java.io.File;
 
 /**
  * 
@@ -20,33 +22,94 @@ public class ContactWriterReader {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		File myFile = new File("myOutputFile.txt");
+		File myFile = new File("myContacts.txt");
 		Contact[] myContacts;
 		myContacts = new Contact[25]; // initialize to 25 elements
 		PrintWriter outputFile;
 		BufferedReader inputFile;
 		Scanner keyboard = new Scanner(System.in);
-		String inputString;
+		String inputString; //= null
 		int inputInt;
 		int c = 1;
+		
 
+		while( !myFile.exists() ){
+			System.out.print(myFile.getName() + " does not exist. Enter contact information.");
+			inputString = keyboard.nextLine();
+			myFile = new File(inputString);
+		}
+		
+		inputFile= new BufferedReader( new FileReader(myFile) );
+		
+		
+		outputFile=new PrintWriter(myFile);
 		
 		
 		
+		inputFile.mark(256);
+		
+		while( inputFile.ready() ){
+			inputString = inputFile.readLine();
+			System.out.println( "line [" + c++ + "] = " + inputString );
+		}
+		
+		inputFile.reset();
+		
+		Stream<String> newStream;
+		newStream = inputFile.lines();
+
+		newStream.forEach( s -> System.out.println(s) );
+		
+		inputFile.close();
 		
 		
-		
-		
-		
-		
-		
-		/* File myFile = new File( "my-contacts.txt");
-//		Contact[] myContacts;
-//		myContacts = new Contact[25]; // initialize to 25 elements
-		BufferedReader inputFile;
-		String input;
-		int numContacts = 0;
-		Scanner keyboard = new Scanner( System.in );
+		/*
+       
+        System.out.print( "Enter the last name: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setLastName( input );
+        
+        System.out.print( "Enter the first name: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setFirstName( input );        
+        
+        System.out.print( "Enter the middle name: " );
+        input = keyboard.nextLine();
+       	myContacts[numContacts].setMiddleName( input );
+        
+        System.out.print( "Enter prefix: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts]t.setPrefix( input );
+        
+        System.out.print( "Enter phone number: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setPhone( input );
+        
+        System.out.print( "Enter email: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setEmail( input );
+        
+        System.out.print( "Enter street address: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setStreet( input );
+        
+        System.out.print( "Enter city: " );
+        input = keyboard.nextLine();
+       	myContacts[numContacts].setCity( input );
+        
+        System.out.print( "Enter state: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setState( input );
+        
+        System.out.print( "Enter ZIP code: " );
+        input = keyboard.nextLine();
+       	myContacts[numContacts].setZip( input );
+        
+        System.out.print( "Enter occupation: " );
+        input = keyboard.nextLine();
+        myContacts[numContacts].setOccupation( input );
+        
+        
 		
 		//loop of contact objects
 		// new loop to write each object from contact class object with stuff
@@ -119,58 +182,6 @@ public class ContactWriterReader {
 		
 	//		System.out.print(stuff.getName() + " does not exist. Enter new contact information." );
 		*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*File myFile = new File("myOutputFile.txt");
-		//PrintWriter outputFile;
-		BufferedReader inputFile;
-		Scanner keyboard = new Scanner(System.in);
-		String inputString;
-		int inputInt;
-		int c = 1;
-
-		while( !myFile.exists() ){
-			System.out.print(myFile.getName() + " does not exist. New name: ");
-			inputString = keyboard.nextLine();
-			myFile = new File(inputString);
-		}
-		
-		inputFile= new BufferedReader( new FileReader(myFile) );
-		/*
-		while(myFile.exists()){
-			System.out.print(myFile.getName() + " exists. New name: ");
-			inputString = keybd.nextLine();
-			myFile = new File(inputString);
-		}
-		
-		outputFile=new PrintWriter(myFile);
-		*/
-		
-		/*inputFile.mark(256);
-		//do something silly
-		while( inputFile.ready() ){
-			inputString = inputFile.readLine();
-			System.out.println( "line [" + c++ + "] = " + inputString );
-		}
-		
-		inputFile.reset();
-		
-		Stream<String> newStream;
-		newStream = inputFile.lines();
-
-		newStream.forEach( s -> System.out.println(s) );
-		
-	inputFile.close();
-	*/
 	}
 
 }
