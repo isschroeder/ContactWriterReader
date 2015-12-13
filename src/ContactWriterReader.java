@@ -1,10 +1,7 @@
+//import Contact.Contact;
 import java.io.*;
 import java.util.Scanner;
 import java.util.stream.Stream;
-
-import ContactTest.Contact;
-
-import java.io.File;
 
 /**
  * 
@@ -22,35 +19,155 @@ public class ContactWriterReader {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		File myFile = new File("myContacts.txt");
+		File fileStuff = new File("myContacts.txt");
 		Contact[] myContacts;
-		myContacts = new Contact[25]; // initialize to 25 elements
+		myContacts = new Contact[110]; // initialize to 110 elements (enough for 10 contacts)
 		PrintWriter outputFile;
 		BufferedReader inputFile;
+		int numContacts = 1;
 		Scanner keyboard = new Scanner(System.in);
-		String inputString; //= null
-		int inputInt;
-		int c = 1;
+		String input;
+		//int inputInt;
+		int ctr = 1;
 		
-
-		while( !myFile.exists() ){
-			System.out.print(myFile.getName() + " does not exist. Enter contact information.");
-			inputString = keyboard.nextLine();
-			myFile = new File(inputString);
+		BufferedReader reader = new BufferedReader( new FileReader(fileStuff) );
+		while(reader.ready() ){
+			// create new contact objects
+			myContacts[numContacts] = new Contact();
+			
+			System.out.println( "Contact" + numContacts );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setLastName( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setFirstName( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setMiddleName( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setPrefix( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setPhone( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setEmail( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setStreet( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setCity( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setState( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setZip( input );
+			
+			input = reader.readLine();
+			myContacts[numContacts].setOccupation( input );
+			// increment counter
+			numContacts++;
+		}
+		reader.close();
+		
+		for( ctr = 1; ctr < numContacts; ctr++ ){
+			System.out.println( "Contact " + ctr );
+			System.out.println( "Last name: " + myContacts[ctr].getLastName() );
+			System.out.println( "First name: " + myContacts[ctr].getFirstName() );
+			System.out.println( "Middle name: " + myContacts[ctr].getMiddleName() );
+			System.out.println( "Prefix: " + myContacts[ctr].getPrefix() );
+			System.out.println( "Phone: " + myContacts[ctr].getPhone() );
+			System.out.println( "Email: " + myContacts[ctr].getEmail() );
+			System.out.println( "Street: " + myContacts[ctr].getStreet() );
+			System.out.println( "City: " + myContacts[ctr].getCity() );
+			System.out.println( "State: " + myContacts[ctr].getState() );
+			System.out.println( "ZIP: " + myContacts[ctr].getZip() );
+			System.out.println( "Occupation: " + myContacts[ctr].getOccupation() );
+			System.out.println( "------" );
 		}
 		
-		inputFile= new BufferedReader( new FileReader(myFile) );
+		do { System.out.println(fileStuff.getName() + 
+			" does not exist. Enter new contact information.");
+			do{ fileStuff.createNewFile();
+				
+				PrintWriter writer = new PrintWriter(fileStuff);
+				outputFile = new PrintWriter(fileStuff);
+				myContacts[numContacts] = new Contact();
+			
+				System.out.print( "Last name: ");
+				input = keyboard.nextLine();
+				myContacts[numContacts].setLastName( input );
+			
+				System.out.print( "First name: ");
+				input = keyboard.nextLine();
+				myContacts[numContacts].setFirstName( input );
+	   
+				System.out.print( "Middle name: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setMiddleName( input );
+	        
+				System.out.print( "Prefix: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setPrefix( input );
+	        
+				System.out.print( "Phone number: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setPhone( input );
+	        
+				System.out.print( "Email: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setEmail( input );
+	        
+				System.out.print( "Street address: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setStreet( input );
+	        
+				System.out.print( "City: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setCity( input );
+	        
+				System.out.print( "State: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setState( input );
+	        
+				System.out.print( "ZIP code: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setZip( input );
+	        
+				System.out.print( "Occupation: " );
+				input = keyboard.nextLine();
+				myContacts[numContacts].setOccupation( input );
+			
+				System.out.println( "Would you like to enter another(y/n)?" );
+				input = keyboard.nextLine().toLowerCase();
+				
+				// increment our counter so we make a new object
+				numContacts++;
+			
+				}	while( input.equals("y") );
+				//writer = new PrinterWriter(fileStuff);
+				// loop through array and print
+			outputFile.close();
+			
+		} while( !fileStuff.exists() );
+			input = keyboard.nextLine();
+			fileStuff = new File(input);
 		
+		//outputFile.close();
 		
-		outputFile=new PrintWriter(myFile);
+		inputFile = new BufferedReader( new FileReader(fileStuff) );
 		
-		
+		//outputFile = new PrintWriter(fileStuff);
 		
 		inputFile.mark(256);
 		
 		while( inputFile.ready() ){
-			inputString = inputFile.readLine();
-			System.out.println( "line [" + c++ + "] = " + inputString );
+			input = inputFile.readLine();
+			System.out.println( "Contact + c++ = " + input );
 		}
 		
 		inputFile.reset();
