@@ -22,14 +22,10 @@ public class ContactWriterReader {
 		File fileStuff = new File("myContacts.txt");
 		Contact[] myContacts;
 		myContacts = new Contact[110]; // initialize to 110 elements (enough for 10 contacts)
-		//PrintWriter outputFile;
-	//	BufferedReader inputFile;
 		int numContacts = 0;
 		Scanner keyboard = new Scanner(System.in);
 		String input;
 		int ctr = 1;
-	//	inputFile = new BufferedReader( new FileReader(fileStuff) );
-	//	outputFile = new PrintWriter(fileStuff);
 		
 		if( fileStuff.exists() ){
 			BufferedReader reader = new BufferedReader( new FileReader(fileStuff) );
