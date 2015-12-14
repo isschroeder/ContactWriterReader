@@ -1,16 +1,10 @@
-//import Contact.Contact;
 import java.io.*;
 import java.util.Scanner;
-import java.util.stream.Stream;
-
-/**
- * 
- */
 
 /**
  * @author woytek
  * @author Isabelle Schroeder
- * This program saves and reads a file of contacts.
+ * This program saves and reads a file of contacts maybe.
  */
 public class ContactWriterReader {
 
@@ -19,19 +13,20 @@ public class ContactWriterReader {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		File fileStuff = new File("myContacts.txt");
-		Contact[] myContacts;
-		myContacts = new Contact[110]; // initialize to 110 elements (enough for 10 contacts)
-		int numContacts = 0;
-		Scanner keyboard = new Scanner(System.in);
-		String input;
-		int ctr = 1;
+		File fileStuff = new File("myContacts.txt"); // new file created!!
+		Contact[] myContacts; // array!
+		myContacts = new Contact[20]; // initialize to 20 contacts
+		int numContacts = 0; // number of contacts
+		Scanner keyboard = new Scanner(System.in); // for user's inputting needs
+		String input; // to hold user's inputting needs
+		int ctr = 0; // counter
 		
+		// When the file already exists, read all the contents!
 		if( fileStuff.exists() ){
-			BufferedReader reader = new BufferedReader( new FileReader(fileStuff) );
+			BufferedReader reader = new BufferedReader( new FileReader(fileStuff) ); // for reading the file!
 			
-			while(reader.ready() );
-				// create new contact objects
+			while(reader.ready() ){
+				// create new contact objects for future reading
 				myContacts[numContacts] = new Contact();
 			
 				input = reader.readLine();
@@ -66,12 +61,13 @@ public class ContactWriterReader {
 			
 				input = reader.readLine();
 				myContacts[numContacts].setOccupation( input );
-				// increment counter
-				numContacts++;
-			
-			reader.close();
 		
-			for ( ctr = 1; ctr < numContacts; ctr++ ){
+				numContacts++; // increment counter
+			}
+			reader.close(); // must close reader!
+		
+			// printint out all those wonderful contacts
+			for ( ctr = 0; ctr < numContacts; ctr++ ){
 				System.out.println( "Last name: " + myContacts[ctr].getLastName() );
 				System.out.println( "First name: " + myContacts[ctr].getFirstName() );
 				System.out.println( "Middle name: " + myContacts[ctr].getMiddleName() );
@@ -86,13 +82,10 @@ public class ContactWriterReader {
 				System.out.println( "------" );
 			}
 			
-		} else { 
-			//do { System.out.println(fileStuff.getName() + 
-			//" does not exist. Enter new contact information.");
-			//fileStuff.createNewFile();
+		} else { // When the file doesn't exist...
+			do{ myContacts[numContacts] = new Contact(); // make a new file!!
 			
-			do{ myContacts[numContacts] = new Contact();
-			
+				// Setting all the contact info you would ever need to avoid someone!
 				System.out.print( "Last name: ");
 				input = keyboard.nextLine();
 				myContacts[numContacts].setLastName( input );
@@ -140,16 +133,17 @@ public class ContactWriterReader {
 				System.out.println( "Would you like to enter another(y/n)?" );
 				input = keyboard.nextLine().toLowerCase();
 			
-				// increment our counter so we make a new object
+				// increment our counter so we make a new object without getting rid of the old one
 				numContacts++;
 			
-				} while( input.equalsIgnoreCase("y") );
-				// loop through array and print
+				} while( input.equalsIgnoreCase("y") ); // keep making contacts until the user is done
+				
 		}	
 		
-		PrintWriter writer = new PrintWriter( fileStuff );
+		PrintWriter writer = new PrintWriter( fileStuff ); // for writing info to disk!!
 		
-		for ( ctr = 1; ctr < numContacts; ctr++ ){
+		for ( ctr = 1; ctr < numContacts; ctr++ ){ 
+			// printing, printing, printing
 			writer.println( myContacts[ctr].getLastName() );
 			writer.println( myContacts[ctr].getFirstName() );
 			writer.println( myContacts[ctr].getMiddleName() );
@@ -164,37 +158,7 @@ public class ContactWriterReader {
 			System.out.println( "------" );
 		}
 		
-		writer.close();
-		
-		
-		
-		
-		
-		
-		//outputFile.close();
-		
-		
-		
-		/* while( !fileStuff.exists() );
-			input = keyboard.nextLine();
-		
-		inputFile.mark(256);
-		
-		while( inputFile.ready() ){
-			input = inputFile.readLine();
-			System.out.println( input );
-		}
-		
-		inputFile.reset();
-		
-		Stream<String> newStream;
-		newStream = inputFile.lines();
-
-		newStream.forEach( s -> System.out.println(s) );
-		
-		inputFile.close();
-		*/
-		
+		writer.close(); // always close your stuff!
 	}
 
 }
