@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,8 @@ public class ContactWriterReader {
 		
 		File fileStuff = new File("myContacts.txt"); // new file created!!
 		Contact[] myContacts; // array!
-		myContacts = new Contact[20]; // initialize to 20 contacts
+		// Creates an array list so we'll never run out of room!!
+		ArrayList<Contact> myContactsUnlimited = new ArrayList<Contact>(); // MAGIC array!!
 		int numContacts = 0; // number of contacts
 		Scanner keyboard = new Scanner(System.in); // for user's inputting needs
 		String input; // to hold user's inputting needs
@@ -27,112 +29,117 @@ public class ContactWriterReader {
 			
 			while(reader.ready() ){
 				// create new contact objects for future reading
-				myContacts[numContacts] = new Contact();
-			
-				input = reader.readLine();
-				myContacts[numContacts].setLastName( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setFirstName( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setMiddleName( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setPrefix( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setPhone( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setEmail( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setStreet( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setCity( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setState( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setZip( input );
-			
-				input = reader.readLine();
-				myContacts[numContacts].setOccupation( input );
+				Contact contact = new Contact(); // makes code look cleaner
 		
+				input = reader.readLine();
+				contact.setLastName( input );
+			
+				input = reader.readLine();
+				contact.setFirstName( input );
+			
+				input = reader.readLine();
+				contact.setMiddleName( input );
+			
+				input = reader.readLine();
+				contact.setPrefix( input );
+			
+				input = reader.readLine();
+				contact.setPhone( input );
+			
+				input = reader.readLine();
+				contact.setEmail( input );
+			
+				input = reader.readLine();
+				contact.setStreet( input );
+			
+				input = reader.readLine();
+				contact.setCity( input );
+			
+				input = reader.readLine();
+				contact.setState( input );
+			
+				input = reader.readLine();
+				contact.setZip( input );
+			
+				input = reader.readLine();
+				contact.setOccupation( input );
+		
+				myContactsUnlimited.add(contact); // actually writing in array list
+				
 				numContacts++; // increment counter
 			}
 			reader.close(); // must close reader!
 		
-			// printint out all those wonderful contacts
+			// printing out all those wonderful contacts
 			for ( ctr = 0; ctr < numContacts; ctr++ ){
-				System.out.println( "Last name: " + myContacts[ctr].getLastName() );
-				System.out.println( "First name: " + myContacts[ctr].getFirstName() );
-				System.out.println( "Middle name: " + myContacts[ctr].getMiddleName() );
-				System.out.println( "Prefix: " + myContacts[ctr].getPrefix() );
-				System.out.println( "Phone: " + myContacts[ctr].getPhone() );
-				System.out.println( "Email: " + myContacts[ctr].getEmail() );
-				System.out.println( "Street: " + myContacts[ctr].getStreet() );
-				System.out.println( "City: " + myContacts[ctr].getCity() );
-				System.out.println( "State: " + myContacts[ctr].getState() );
-				System.out.println( "ZIP: " + myContacts[ctr].getZip() );
-				System.out.println( "Occupation: " + myContacts[ctr].getOccupation() );
+				Contact contact = myContactsUnlimited.get(ctr); // making code cleaner again
+				
+				System.out.println( "Last name: " + contact.getLastName() );
+				System.out.println( "First name: " + contact.getFirstName() );
+				System.out.println( "Middle name: " + contact.getMiddleName() );
+				System.out.println( "Prefix: " + contact.getPrefix() );
+				System.out.println( "Phone: " + contact.getPhone() );
+				System.out.println( "Email: " + contact.getEmail() );
+				System.out.println( "Street: " + contact.getStreet() );
+				System.out.println( "City: " + contact.getCity() );
+				System.out.println( "State: " + contact.getState() );
+				System.out.println( "ZIP: " + contact.getZip() );
+				System.out.println( "Occupation: " + contact.getOccupation() );
 				System.out.println( "------" );
 			}
 			
 		} else { // When the file doesn't exist...
-			do{ myContacts[numContacts] = new Contact(); // make a new file!!
+			do{ Contact contact = new Contact(); // make a new file!!
 			
 				// Setting all the contact info you would ever need to avoid someone!
 				System.out.print( "Last name: ");
 				input = keyboard.nextLine();
-				myContacts[numContacts].setLastName( input );
+				contact.setLastName( input );
 			
 				System.out.print( "First name: ");
 				input = keyboard.nextLine();
-				myContacts[numContacts].setFirstName( input );
+				contact.setFirstName( input );
 	   
 				System.out.print( "Middle name: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setMiddleName( input );
+				contact.setMiddleName( input );
 	        
 				System.out.print( "Prefix: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setPrefix( input );
+				contact.setPrefix( input );
 	        
 				System.out.print( "Phone number: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setPhone( input );
+				contact.setPhone( input );
 	        
 				System.out.print( "Email: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setEmail( input );
+				contact.setEmail( input );
 	        
 				System.out.print( "Street address: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setStreet( input );
+				contact.setStreet( input );
 
 				System.out.print( "City: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setCity( input );
+				contact.setCity( input );
 	        
 				System.out.print( "State: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setState( input );
+				contact.setState( input );
 	        
 				System.out.print( "ZIP code: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setZip( input );
+				contact.setZip( input );
 	        
 				System.out.print( "Occupation: " );
 				input = keyboard.nextLine();
-				myContacts[numContacts].setOccupation( input );
+				contact.setOccupation( input );
 				
 				System.out.println( "Would you like to enter another(y/n)?" );
 				input = keyboard.nextLine().toLowerCase();
-			
+				
+				myContactsUnlimited.add(contact); // writing to array list
 				// increment our counter so we make a new object without getting rid of the old one
 				numContacts++;
 			
@@ -142,19 +149,20 @@ public class ContactWriterReader {
 		
 		PrintWriter writer = new PrintWriter( fileStuff ); // for writing info to disk!!
 		
-		for ( ctr = 1; ctr < numContacts; ctr++ ){ 
+		for ( ctr = 0; ctr < numContacts; ctr++ ){ 
+			Contact contact = myContactsUnlimited.get(ctr); // code cleaning stuff
 			// printing, printing, printing
-			writer.println( myContacts[ctr].getLastName() );
-			writer.println( myContacts[ctr].getFirstName() );
-			writer.println( myContacts[ctr].getMiddleName() );
-			writer.println( myContacts[ctr].getPrefix() );
-			writer.println( myContacts[ctr].getPhone() );
-			writer.println( myContacts[ctr].getEmail() );
-			writer.println( myContacts[ctr].getStreet() );
-			writer.println( myContacts[ctr].getCity() );
-			writer.println( myContacts[ctr].getState() );
-			writer.println( myContacts[ctr].getZip() );
-			writer.println( myContacts[ctr].getOccupation() );
+			writer.println( contact.getLastName() );
+			writer.println( contact.getFirstName() );
+			writer.println( contact.getMiddleName() );
+			writer.println( contact.getPrefix() );
+			writer.println( contact.getPhone() );
+			writer.println( contact.getEmail() );
+			writer.println( contact.getStreet() );
+			writer.println( contact.getCity() );
+			writer.println( contact.getState() );
+			writer.println( contact.getZip() );
+			writer.println( contact.getOccupation() );
 			System.out.println( "------" );
 		}
 		
